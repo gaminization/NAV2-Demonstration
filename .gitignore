@@ -222,5 +222,12 @@ __marimo__/
 # Colcon build artifacts
 install/
 log/
+build/
 
 .vscode/
+
+# Bags and runtime captures
+bags/
+assets/captures/
+*.mp4
+!NAV2_Goals_and_Waypoints.mp4

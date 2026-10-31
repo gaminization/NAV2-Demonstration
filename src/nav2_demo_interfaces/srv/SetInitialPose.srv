@@ -1,0 +1,7 @@
+# Tell AMCL where the robot is, in the map frame.
+float64 x
+float64 y
+float64 yaw   # radians
+---
+bool success
+string message

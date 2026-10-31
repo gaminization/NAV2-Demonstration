@@ -20,7 +20,7 @@ sudo apt install -y \
   python3-colcon-common-extensions
 
 # Environment (added once)
-if ! grep -q "# nav2-demo" ~/.bashrc && ! grep -q "# tb3-nav2-launch" ~/.bashrc; then
+if ! grep -q "# nav2-demo" ~/.bashrc; then
   cat >> ~/.bashrc <<'EOB'
 
 # nav2-demo

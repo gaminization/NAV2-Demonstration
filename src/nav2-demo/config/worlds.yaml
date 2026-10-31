@@ -1,0 +1,102 @@
+# World registry. Choose one with:
+#   ros2 launch nav2-demo nav2-demo.launch.py world:=<name>
+#
+# Frames:  spawn         = Gazebo WORLD frame (where the robot is dropped)
+#          initial_pose  = MAP frame (what AMCL should believe)
+#          waypoints     = MAP frame
+# For a map you built yourself with SLAM, the map origin is where the robot
+# started, so initial_pose is usually (0, 0, 0).
+#
+# Resource specs: {package: pkg, path: rel} | {home: dir_under_home, path: rel} | "/abs/path"
+#
+# Optional per world:
+#   dynamic_obstacles: moving cylinders (start/end in Gazebo WORLD frame, speed m/s)
+#   nav_overrides:     Nav2 tuning for this world (see nav_profiles.yaml)
+#
+# STATUS: every waypoint / spawn / demo_obstacle value below is a PLACEHOLDER
+# that has NOT been verified in simulation. Check each one in RViz (see docs/WORLDS.md).
+
+worlds:
+  tb3_world:
+    description: Official TurtleBot3 hexagon with 9 pillars. Map ships with Nav2. Easiest start.
+    difficulty: easy
+    world_file: {package: turtlebot3_gazebo, path: worlds/turtlebot3_world.world}
+    map: {package: turtlebot3_navigation2, path: map/map.yaml}
+    spawn: {x: -2.0, y: -0.5}
+    initial_pose: {x: -2.0, y: -0.5, yaw: 0.0}
+    demo_obstacle: {x: -1.2, y: -0.5}
+    dynamic_obstacles:
+      - {name: walker1, start: {x: 0.5, y: 1.0}, end: {x: 0.5, y: -1.0}, speed: 0.15}
+    waypoints:
+      - {name: "Point A", x: -1.0, y: 1.0, yaw: 0}
+      - {name: "Point B", x: 1.0, y: 1.0, yaw: -90}
+      - {name: "Point C", x: 1.0, y: -1.0, yaw: 180}
+      - {name: "Point D", x: -1.0, y: -1.0, yaw: 90}
+
+  house:
+    description: TurtleBot3 House. Several rooms and doorways. Needs a map you build (5 min).
+    difficulty: medium
+    world_file: {package: turtlebot3_gazebo, path: worlds/turtlebot3_house.world}
+    map: {package: nav2-demo, path: maps/house_map.yaml}
+    spawn: {x: -2.0, y: 0.5}
+    initial_pose: {x: 0.0, y: 0.0, yaw: 0.0}
+    demo_obstacle: {x: 1.0, y: 0.0}
+    dynamic_obstacles:
+      - {name: walker1, start: {x: 0.0, y: 0.5}, end: {x: 2.0, y: 0.5}, speed: 0.15}
+    nav_overrides: {inflation_radius: 0.30, cost_scaling_factor: 5.0}
+    waypoints:
+      - {name: "Room 1", x: 1.5, y: 1.0, yaw: 90}
+      - {name: "Hallway", x: 3.5, y: 2.5, yaw: 0}
+      - {name: "Room 2", x: 5.5, y: 1.0, yaw: -90}
+      - {name: "Room 3", x: 3.0, y: -0.5, yaw: 180}
+
+  stage4:
+    description: TurtleBot3 DQN stage 4. Arena with walls and obstacles. Needs a map you build. Experimental.
+    difficulty: medium
+    world_file: {package: turtlebot3_gazebo, path: worlds/turtlebot3_dqn_stage4.world}
+    map: {package: nav2-demo, path: maps/stage4_map.yaml}
+    spawn: {x: 0.0, y: 0.0}
+    initial_pose: {x: 0.0, y: 0.0, yaw: 0.0}
+    demo_obstacle: {x: 1.0, y: 0.0}
+    dynamic_obstacles:
+      - {name: walker1, start: {x: 1.0, y: 1.0}, end: {x: 1.0, y: -1.0}, speed: 0.15}
+    waypoints:
+      - {name: "Point A", x: 1.5, y: 1.5, yaw: 0}
+      - {name: "Point B", x: -1.5, y: 1.5, yaw: 0}
+      - {name: "Point C", x: -1.5, y: -1.5, yaw: 0}
+
+  aws_house:
+    description: AWS RoboMaker small house. Furnished, many props. Install with scripts/install_aws_worlds.sh. Experimental.
+    difficulty: hard
+    world_file: {home: .nav2_demo/aws/aws-robomaker-small-house-world, path: worlds/small_house.world}
+    map: {home: .nav2_demo/aws/aws-robomaker-small-house-world, path: maps/turtlebot3_waffle_pi/map.yaml}
+    model_paths:
+      - {home: .nav2_demo/aws/aws-robomaker-small-house-world, path: models}
+      - {home: .nav2_demo/aws/aws-robomaker-small-house-world, path: fuel_models}
+    spawn: {x: 3.45, y: 2.15}
+    initial_pose: {x: 3.45, y: 2.15, yaw: 0.0}
+    demo_obstacle: {x: 3.0, y: 2.0}
+    dynamic_obstacles:
+      - {name: walker1, start: {x: 2.0, y: 2.0}, end: {x: 4.0, y: 2.0}, speed: 0.15}
+    nav_overrides: {inflation_radius: 0.30, cost_scaling_factor: 5.0}
+    waypoints:
+      - {name: "Point A", x: 1.0, y: 1.0, yaw: 0}
+      - {name: "Point B", x: -2.0, y: 2.0, yaw: 0}
+
+  aws_warehouse:
+    description: AWS RoboMaker small warehouse. Shelves and narrow aisles. Experimental.
+    difficulty: hard
+    world_file: {home: .nav2_demo/aws/aws-robomaker-small-warehouse-world, path: worlds/no_roof_small_warehouse/no_roof_small_warehouse.world}
+    map: {home: .nav2_demo/aws/aws-robomaker-small-warehouse-world, path: maps/005/map.yaml}
+    model_paths:
+      - {home: .nav2_demo/aws/aws-robomaker-small-warehouse-world, path: models}
+      - {home: .nav2_demo/aws/aws-robomaker-small-warehouse-world, path: fuel_models}
+    spawn: {x: 0.0, y: 0.0}
+    initial_pose: {x: 0.0, y: 0.0, yaw: 0.0}
+    demo_obstacle: {x: 1.0, y: 0.0}
+    dynamic_obstacles:
+      - {name: walker1, start: {x: 2.0, y: 0.0}, end: {x: 2.0, y: 3.0}, speed: 0.2}
+    nav_overrides: {inflation_radius: 0.30, cost_scaling_factor: 5.0}
+    waypoints:
+      - {name: "Aisle 1", x: 3.0, y: 0.0, yaw: 0}
+      - {name: "Aisle 2", x: 3.0, y: 4.0, yaw: 180}

@@ -1,0 +1,35 @@
+# Usage (recommended via the helper):  scripts/docker.sh up house burger
+services:
+  sim:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      args:
+        HOST_UID: "${HOST_UID:-1000}"
+        HOST_GID: "${HOST_GID:-1000}"
+    image: nav2-demo:humble
+    container_name: nav2-demo-sim
+    # Host networking: GUI, DDS and extra terminals (docker exec) all just work.
+    # ROS_LOCALHOST_ONLY=1 keeps DDS traffic on this machine.
+    network_mode: host
+    ipc: host
+    stdin_open: true
+    tty: true
+    environment:
+      DISPLAY: "${DISPLAY:-:0}"
+      TURTLEBOT3_MODEL: "${TURTLEBOT3_MODEL:-waffle}"
+      ROS_DOMAIN_ID: "${ROS_DOMAIN_ID:-42}"
+      ROS_LOCALHOST_ONLY: "1"
+      QT_X11_NO_MITSHM: "1"
+    volumes:
+      - .:/ws
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ./bags:/home/dev/nav2_demo_bags
+      - ${HOME}/.nav2_demo:/home/dev/.nav2_demo
+      - gazebo_cache:/home/dev/.gazebo
+    command: >
+      ros2 launch nav2-demo nav2-demo.launch.py
+      world:=${WORLD:-tb3_world} model:=${TURTLEBOT3_MODEL:-waffle}
+
+volumes:
+  gazebo_cache:

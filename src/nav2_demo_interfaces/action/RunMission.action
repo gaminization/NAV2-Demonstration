@@ -1,0 +1,13 @@
+# Goal: visit these map-frame poses in order.
+string mission_name
+geometry_msgs/PoseStamped[] waypoints
+---
+# Result
+bool success
+string message
+uint32 waypoints_reached
+uint32[] missed_waypoints
+---
+# Feedback
+uint32 current_waypoint
+uint32 total_waypoints

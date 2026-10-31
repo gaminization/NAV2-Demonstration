@@ -1,21 +1,36 @@
 <?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>nav2-demo</name>
   <version>0.1.0</version>
-  <description>One-command launch of TurtleBot3 in Gazebo with the Nav2 stack.</description>
+  <description>TurtleBot3 + Nav2 demo with switchable Gazebo worlds, QoS, bags and security options.</description>
   <maintainer email="66058398+gaminization@users.noreply.github.com">Garv Arora</maintainer>
   <license>MIT</license>
 
-  <buildtool_depend>ament_cmake</buildtool_depend>
-
-  <exec_depend>ament_index_python</exec_depend>
-  <exec_depend>launch</exec_depend>
-  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>action_msgs</exec_depend>
+  <exec_depend>nav2_msgs</exec_depend>
+  <exec_depend>nav2_bringup</exec_depend>
+  <exec_depend>nav2_simple_commander</exec_depend>
+  <exec_depend>nav2_demo_interfaces</exec_depend>
   <exec_depend>turtlebot3_gazebo</exec_depend>
   <exec_depend>turtlebot3_navigation2</exec_depend>
-  <exec_depend>nav2_bringup</exec_depend>
+  <exec_depend>turtlebot3_cartographer</exec_depend>
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>python3-yaml</exec_depend>
+  <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>nav_msgs</exec_depend>
+  <exec_depend>tf2_ros_py</exec_depend>
+  <exec_depend>gazebo_msgs</exec_depend>
+  <exec_depend>ros2bag</exec_depend>
+
+  <test_depend>python3-pytest</test_depend>
 
   <export>
-    <build_type>ament_cmake</build_type>
+    <build_type>ament_python</build_type>
   </export>
 </package>

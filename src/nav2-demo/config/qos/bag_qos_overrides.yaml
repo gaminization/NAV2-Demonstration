@@ -1,0 +1,32 @@
+# Passed to `ros2 bag record --qos-profile-overrides-path`.
+# Makes the recorder subscribe with the QoS each topic really uses (see docs/QOS.md).
+/map:
+  history: keep_last
+  depth: 1
+  reliability: reliable
+  durability: transient_local
+/tf_static:
+  history: keep_last
+  depth: 1
+  reliability: reliable
+  durability: transient_local
+/amcl_pose:
+  history: keep_last
+  depth: 1
+  reliability: reliable
+  durability: transient_local
+/mission_status:
+  history: keep_last
+  depth: 1
+  reliability: reliable
+  durability: transient_local
+/initialpose:
+  history: keep_last
+  depth: 1
+  reliability: reliable
+  durability: transient_local
+/scan:
+  history: keep_last
+  depth: 5
+  reliability: best_effort
+  durability: volatile
