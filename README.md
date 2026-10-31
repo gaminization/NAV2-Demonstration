@@ -1,5 +1,17 @@
 # TurtleBot3 Autonomous Navigation with Nav2 in Gazebo
 
+## Real-Time Demonstration
+
+<p align="center">
+  <img src="assets/demo.gif" alt="TurtleBot3 Autonomous Navigation Demo" width="100%" />
+</p>
+
+<video src="NAV2_Goals_and_Waypoints.mp4" controls width="100%">
+  Your browser does not support the video tag.
+</video>
+
+> 📹 **Full Demo Video:** [`NAV2_Goals_and_Waypoints.mp4`](./NAV2_Goals_and_Waypoints.mp4) (includes complete goal execution, waypoint following, and dynamic obstacle avoidance in Gazebo & RViz).
+
 ## Task
 Set up a TurtleBot3 robot in a Gazebo environment and configure the ROS 2 Navigation2 (Nav2) stack so it navigates autonomously to a goal while avoiding obstacles. Existing packages are used; no custom navigation algorithm is written.
 
